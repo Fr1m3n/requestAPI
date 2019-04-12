@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentDto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">requestservice</a> &gt; <a href="index.source.html" class="el_package">com.devyatcorp.requestservice.Comment.DTO</a> &gt; <span class="el_source">CommentDto.java</span></div><h1>CommentDto.java</h1><pre class="source lang-java linenums">package com.devyatcorp.requestservice.Comment.DTO;
+
+import com.devyatcorp.requestservice.Comment.CommentRecord;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import java.util.Objects;
+
+public class CommentDto {
+    private String text;
+    private Long request;
+
+<span class="fc" id="L13">    public CommentDto(CommentRecord record){</span>
+<span class="fc" id="L14">        this.text = record.getText();</span>
+<span class="fc" id="L15">        this.request = record.getRequest();</span>
+<span class="fc" id="L16">    }</span>
+
+<span class="fc" id="L18">    public CommentDto(String text, Long request) {</span>
+<span class="fc" id="L19">        this.text = text;</span>
+<span class="fc" id="L20">        this.request = request;</span>
+<span class="fc" id="L21">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L25">        return &quot;CommentDto{&quot; +</span>
+                &quot;text='&quot; + text + '\'' +
+                &quot;, request=&quot; + request +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (this == o) return true;</span>
+<span class="pc bpc" id="L34" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="fc" id="L35">        CommentDto that = (CommentDto) o;</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        return Objects.equals(text, that.text) &amp;&amp;</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">                Objects.equals(request, that.request);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L42">        return Objects.hash(text, request);</span>
+    }
+
+<span class="nc" id="L45">    public CommentDto() {</span>
+<span class="nc" id="L46">    }</span>
+
+    public String getText() {
+<span class="nc" id="L49">        return text;</span>
+    }
+
+    public void setText(String text) {
+<span class="nc" id="L53">        this.text = text;</span>
+<span class="nc" id="L54">    }</span>
+
+    public Long getRequest() {
+<span class="nc" id="L57">        return request;</span>
+    }
+
+    public void setRequest(Long request) {
+<span class="nc" id="L61">        this.request = request;</span>
+<span class="nc" id="L62">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

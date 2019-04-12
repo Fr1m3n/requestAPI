@@ -1,17 +1,18 @@
-package com.devyatcorp.requestservice.Request;
+package com.devyatcorp.requestservice.Request.DTO;
 
-import com.devyatcorp.requestservice.Comment.CommentRecord;
+import com.devyatcorp.requestservice.Comment.DTO.CommentDto;
+import com.devyatcorp.requestservice.Request.DTO.RequestDto;
 
 import java.util.List;
 import java.util.Objects;
 
-public class RequestWithCommentsRecord {
-    private RequestRecord request;
-    private List<CommentRecord> comments;
+public class RequestWithCommentsDto {
+    private RequestDto request;
+    private List<CommentDto> comments;
 
     @Override
     public String toString() {
-        return "RequestWithCommentsRecord{" +
+        return "RequestWithCommentsDto{" +
                 "record=" + request +
                 ", comments=" + comments +
                 '}';
@@ -21,7 +22,7 @@ public class RequestWithCommentsRecord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RequestWithCommentsRecord that = (RequestWithCommentsRecord) o;
+        RequestWithCommentsDto that = (RequestWithCommentsDto) o;
         return Objects.equals(request, that.request) &&
                 Objects.equals(comments, that.comments);
     }
@@ -31,27 +32,28 @@ public class RequestWithCommentsRecord {
         return Objects.hash(request, comments);
     }
 
-    public RequestWithCommentsRecord(RequestRecord record, List<CommentRecord> comments) {
+    public RequestWithCommentsDto(RequestDto record, List<CommentDto> comments) {
         this.request = record;
         this.comments = comments;
     }
 
-    public RequestRecord getRecord() {
+
+    public RequestDto getRecord() {
         return request;
     }
 
-    public void setRecord(RequestRecord record) {
+    public void setRecord(RequestDto record) {
         this.request = record;
     }
 
-    public List<CommentRecord> getComments() {
+    public List<CommentDto> getComments() {
         return comments;
     }
 
-    public void setComments(List<CommentRecord> comments) {
+    public void setComments(List<CommentDto> comments) {
         this.comments = comments;
     }
 
-    public RequestWithCommentsRecord() {
+    public RequestWithCommentsDto() {
     }
 }

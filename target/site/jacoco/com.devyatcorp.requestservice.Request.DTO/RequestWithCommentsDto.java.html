@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequestWithCommentsDto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">requestservice</a> &gt; <a href="index.source.html" class="el_package">com.devyatcorp.requestservice.Request.DTO</a> &gt; <span class="el_source">RequestWithCommentsDto.java</span></div><h1>RequestWithCommentsDto.java</h1><pre class="source lang-java linenums">package com.devyatcorp.requestservice.Request.DTO;
+
+import com.devyatcorp.requestservice.Comment.DTO.CommentDto;
+import com.devyatcorp.requestservice.Request.DTO.RequestDto;
+
+import java.util.List;
+import java.util.Objects;
+
+public class RequestWithCommentsDto {
+    private RequestDto request;
+    private List&lt;CommentDto&gt; comments;
+
+    @Override
+    public String toString() {
+<span class="nc" id="L15">        return &quot;RequestWithCommentsDto{&quot; +</span>
+                &quot;record=&quot; + request +
+                &quot;, comments=&quot; + comments +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if (this == o) return true;</span>
+<span class="pc bpc" id="L24" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="fc" id="L25">        RequestWithCommentsDto that = (RequestWithCommentsDto) o;</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        return Objects.equals(request, that.request) &amp;&amp;</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">                Objects.equals(comments, that.comments);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L32">        return Objects.hash(request, comments);</span>
+    }
+
+<span class="fc" id="L35">    public RequestWithCommentsDto(RequestDto record, List&lt;CommentDto&gt; comments) {</span>
+<span class="fc" id="L36">        this.request = record;</span>
+<span class="fc" id="L37">        this.comments = comments;</span>
+<span class="fc" id="L38">    }</span>
+
+
+    public RequestDto getRecord() {
+<span class="nc" id="L42">        return request;</span>
+    }
+
+    public void setRecord(RequestDto record) {
+<span class="nc" id="L46">        this.request = record;</span>
+<span class="nc" id="L47">    }</span>
+
+    public List&lt;CommentDto&gt; getComments() {
+<span class="nc" id="L50">        return comments;</span>
+    }
+
+    public void setComments(List&lt;CommentDto&gt; comments) {
+<span class="nc" id="L54">        this.comments = comments;</span>
+<span class="nc" id="L55">    }</span>
+
+<span class="nc" id="L57">    public RequestWithCommentsDto() {</span>
+<span class="nc" id="L58">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

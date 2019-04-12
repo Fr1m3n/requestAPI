@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">requestservice</a> &gt; <a href="index.source.html" class="el_package">com.devyatcorp.requestservice.Request</a> &gt; <span class="el_source">RequestController.java</span></div><h1>RequestController.java</h1><pre class="source lang-java linenums">package com.devyatcorp.requestservice.Request;
+
+import com.devyatcorp.requestservice.Comment.CommentRepo;
+
+import com.devyatcorp.requestservice.Request.DTO.RequestDto;
+import com.devyatcorp.requestservice.Request.DTO.RequestWithCommentsDto;
+import com.devyatcorp.requestservice.Request.DTO.StatusDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+
+@RestController
+<span class="fc" id="L18">public class RequestController {</span>
+
+<span class="fc" id="L20">    private Logger logger = LoggerFactory.getLogger(RequestController.class);</span>
+
+    @Autowired
+    RequestRepo requestRepo;
+
+    @Autowired
+    CommentRepo commentRepo;
+
+    @Autowired
+    RequestService requestService;
+
+    @RequestMapping(method = RequestMethod.POST, path = &quot;/request&quot;)
+    public RequestDto createNewRequest(@RequestBody String description) {
+<span class="nc" id="L33">        logger.info(&quot;created new request record &quot;);</span>
+<span class="nc" id="L34">        return requestService.create(description);</span>
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = &quot;/request/{id}&quot;)
+    public ResponseEntity&lt;RequestWithCommentsDto&gt; getRequestById(@PathVariable(name = &quot;id&quot;) Long id) {
+<span class="nc" id="L39">        RequestWithCommentsDto requestWithCommentsDto = requestService.getById(id);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (requestWithCommentsDto != null) {</span>
+<span class="nc" id="L41">            logger.info(&quot;requested record with id=&quot; + Long.valueOf(id).toString());</span>
+<span class="nc" id="L42">            return new ResponseEntity&lt;&gt;(requestWithCommentsDto, HttpStatus.OK);</span>
+        } else {
+<span class="nc" id="L44">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = &quot;/request/{id}&quot;)
+    public ResponseEntity&lt;RequestWithCommentsDto&gt; deleteRequestById(@PathVariable(name = &quot;id&quot;) Long id) {
+<span class="nc" id="L50">        RequestWithCommentsDto requestWithCommentsDto = requestService.delete(id);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (requestWithCommentsDto != null) {</span>
+<span class="nc" id="L52">            return new ResponseEntity&lt;&gt;(requestWithCommentsDto, HttpStatus.OK);</span>
+        } else {
+<span class="nc" id="L54">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = &quot;/status/{id}&quot;)
+    public ResponseEntity&lt;RequestDto&gt; updateStatus(@PathVariable(name = &quot;id&quot;) Long id,
+                                                   @RequestBody StatusDto status) {
+<span class="nc" id="L61">        RequestDto requestDto = requestService.updateStatus(id, status);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (requestDto != null) {</span>
+<span class="nc" id="L63">            return new ResponseEntity&lt;&gt;(requestDto, HttpStatus.OK);</span>
+        } else {
+<span class="nc" id="L65">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,0 +1,13 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+requestservice,com.devyatcorp.requestservice.Comment,CommentService,2,26,1,1,0,5,1,2,0,2
+requestservice,com.devyatcorp.requestservice.Comment,CommentController,21,7,2,0,4,2,2,1,1,1
+requestservice,com.devyatcorp.requestservice.Comment,CommentRecord,36,21,0,0,7,9,4,5,4,5
+requestservice,com.devyatcorp.requestservice,RequestserviceApplication,5,3,0,0,2,1,1,1,1,1
+requestservice,com.devyatcorp.requestservice.Request.DTO,RequestDto,34,99,5,7,6,22,9,9,4,8
+requestservice,com.devyatcorp.requestservice.Request.DTO,StatusDto,4,9,0,0,2,4,1,2,1,2
+requestservice,com.devyatcorp.requestservice.Request.DTO,RequestWithCommentsDto,53,37,5,5,10,9,12,2,7,2
+requestservice,com.devyatcorp.requestservice.Request,StatusEnum,0,44,0,0,0,5,0,1,0,1
+requestservice,com.devyatcorp.requestservice.Request,RequestService,15,134,4,4,2,23,4,7,0,7
+requestservice,com.devyatcorp.requestservice.Request,RequestRecord,53,28,0,0,12,11,5,6,5,6
+requestservice,com.devyatcorp.requestservice.Request,RequestController,78,7,6,0,15,2,7,1,4,1
+requestservice,com.devyatcorp.requestservice.Comment.DTO,CommentDto,55,49,5,5,10,13,12,3,7,3

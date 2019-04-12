@@ -1,5 +1,6 @@
 package com.devyatcorp.requestservice.Comment;
 
+import com.devyatcorp.requestservice.Comment.DTO.CommentDto;
 import com.devyatcorp.requestservice.Request.RequestRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,17 +25,14 @@ public class CommentController {
     @Autowired
     RequestRepo requestRepo;
 
+    @Autowired
+    CommentService commentService;
+
     @RequestMapping(method = RequestMethod.POST, path = "/comment")
-    public ResponseEntity<CommentRecord> createNewComment(Principal principal,
-                                                         @RequestBody CommentRecord record){
-        if(requestRepo.existsById(record.getRequest())) {
-            record = commentRepo.save(record);
-            logger.info("created new comment with id=" +
-                    Long.valueOf(record.getId()).toString() +
-                    " attached to request with id=" +
-                    Long.valueOf(record.getRequest()).toString() +
-                    " and with text = " + record.getText());
-            return new ResponseEntity<>(record, HttpStatus.OK);
+    public ResponseEntity<CommentDto> createNewComment(@RequestBody CommentDto record){
+        CommentDto newComment = commentService.create(record.getRequest(), record.getText());
+        if(newComment != null) {
+            return new ResponseEntity<>(newComment, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

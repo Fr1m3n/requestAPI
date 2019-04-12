@@ -8,12 +8,15 @@ import javax.persistence.*;
 public class RequestRecord {
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(name="status")
-    private StatusEnum status;
+    private StatusEnum status = StatusEnum.NEW;
+
+    @Column(name="description")
+    private String description;
 
     @Override
     public String toString() {
@@ -27,8 +30,7 @@ public class RequestRecord {
     public RequestRecord() {
     }
 
-    @Column(name="description")
-    private String description;
+
 
     public RequestRecord(String description) {
         this.description = description;
@@ -43,7 +45,7 @@ public class RequestRecord {
         this.description = description;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,7 +57,7 @@ public class RequestRecord {
         this.description = description;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

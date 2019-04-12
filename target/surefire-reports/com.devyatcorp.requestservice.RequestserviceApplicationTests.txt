@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.devyatcorp.requestservice.RequestserviceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.639 s - in com.devyatcorp.requestservice.RequestserviceApplicationTests

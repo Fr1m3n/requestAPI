@@ -1,11 +1,10 @@
 package com.devyatcorp.requestservice.Request;
 
-import com.devyatcorp.requestservice.Comment.CommentRecord;
 import com.devyatcorp.requestservice.Comment.CommentRepo;
-import com.devyatcorp.requestservice.Request.RequestRecord;
-import com.devyatcorp.requestservice.Request.RequestRepo;
-import com.devyatcorp.requestservice.Request.StatusEnum;
 
+import com.devyatcorp.requestservice.Request.DTO.RequestDto;
+import com.devyatcorp.requestservice.Request.DTO.RequestWithCommentsDto;
+import com.devyatcorp.requestservice.Request.DTO.StatusDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 public class RequestController {
@@ -27,57 +25,45 @@ public class RequestController {
     @Autowired
     CommentRepo commentRepo;
 
+    @Autowired
+    RequestService requestService;
+
     @RequestMapping(method = RequestMethod.POST, path = "/request")
-    public RequestRecord createNewRequest(Principal principal,
-                                          @RequestBody String description){
-        RequestRecord record = new RequestRecord(description);
-        record.setStatus(StatusEnum.NEW);
-        logger.info("created new request record with id=" + Long.valueOf(record.getId()).toString());
-        return requestRepo.save(record);
+    public RequestDto createNewRequest(@RequestBody String description) {
+        logger.info("created new request record ");
+        return requestService.create(description);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/request")
-    public ResponseEntity<RequestWithCommentsRecord> getRequestById(Principal principal,
-                                                       @RequestParam(name="id") long id){
-        if(requestRepo.existsById(id)) {
-            RequestRecord record = requestRepo.getById(id);
-            List<CommentRecord> comments = commentRepo.getAllByRequest(id);
-            RequestWithCommentsRecord responseRecord = new RequestWithCommentsRecord(record, comments);
+    @RequestMapping(method = RequestMethod.GET, path = "/request/{id}")
+    public ResponseEntity<RequestWithCommentsDto> getRequestById(@PathVariable(name = "id") Long id) {
+        RequestWithCommentsDto requestWithCommentsDto = requestService.getById(id);
+        if (requestWithCommentsDto != null) {
             logger.info("requested record with id=" + Long.valueOf(id).toString());
-            return new ResponseEntity<>(responseRecord, HttpStatus.OK);
+            return new ResponseEntity<>(requestWithCommentsDto, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, path = "/request")
-    public RequestRecord deleteRequestById(Principal principal,
-                                           @RequestParam(name = "id") long id){
-        RequestRecord record = requestRepo.getById(id);
-        List<CommentRecord> comments = commentRepo.getAllByRequest(id);
-        logger.info("comments count for request with id=" +
-                Long.valueOf(id).toString() +
-                " is " +
-                Integer.valueOf(comments.size()).toString());
-        for (CommentRecord comment : comments) {
-            logger.info("deleting comment with id=" +
-                    Long.valueOf(comment.getId()).toString());
-            commentRepo.delete(comment);
+    @RequestMapping(method = RequestMethod.DELETE, path = "/request/{id}")
+    public ResponseEntity<RequestWithCommentsDto> deleteRequestById(@PathVariable(name = "id") Long id) {
+        RequestWithCommentsDto requestWithCommentsDto = requestService.delete(id);
+        if (requestWithCommentsDto != null) {
+            return new ResponseEntity<>(requestWithCommentsDto, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        requestRepo.delete(record);
-        logger.info("record with id = " + Long.valueOf(record.getId()).toString() + " deleted");
-        return record;
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/request/status")
-    public ResponseEntity<RequestRecord> updateStatus(Principal principal,
-                                      @RequestBody RequestRecord data){
-        if(requestRepo.existsById(data.getId())){
-            RequestRecord record = requestRepo.getById(data.getId());
-            record.setStatus(data.getStatus());
-            return new ResponseEntity<>(requestRepo.save(record), HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.POST, path = "/status/{id}")
+    public ResponseEntity<RequestDto> updateStatus(@PathVariable(name = "id") Long id,
+                                                   @RequestBody StatusDto status) {
+        RequestDto requestDto = requestService.updateStatus(id, status);
+        if (requestDto != null) {
+            return new ResponseEntity<>(requestDto, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
+
